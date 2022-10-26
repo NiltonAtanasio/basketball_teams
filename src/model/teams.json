@@ -1,0 +1,8 @@
+[
+  {
+    "id": "String",
+    "addedAt": "Date",
+    "teamName": "String",
+    "userName": "String"
+  }
+]
