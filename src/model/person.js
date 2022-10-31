@@ -17,6 +17,9 @@ const personSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: new Date()
+  },
+  salt: {
+    type: String
   }
 })
 

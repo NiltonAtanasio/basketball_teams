@@ -1,5 +1,6 @@
 const { default: mongoose } = require('mongoose')
 const PersonSchema = require('../model/person')
+const bcrypt = require('bcrypt')
 
 const getAll = async (req, res) =>  {
   try {
@@ -14,11 +15,17 @@ const getAll = async (req, res) =>  {
 
 const createPerson = async (req, res) => {
   try {
+    let salt = bcrypt.genSaltSync()
+    let reqPassword = req.body.password
+    let password = bcrypt.hashSync(reqPassword, salt)
+
     const newPerson = new PersonSchema({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
       email: req.body.email,
-      createdAt: new Date()
+      password: password,
+      createdAt: new Date(),
+      salt: salt
     })
 
     const savedPerson = await newPerson.save()
@@ -92,9 +99,45 @@ const updatePerson = async (req, res) => {
   }
 }
 
+const login = async (req, res) => {
+ try {
+  let credentials = req.body
+  
+  if(credentials.email && credentials.password){
+    let person = await PersonSchema.findOne({email: credentials.email})
+    
+    if(person){
+    let checkPassword = bcrypt.hashSync(credentials.password, person.salt)
+    
+      if(checkPassword == person.password && credentials.email == person.email){
+        res.status(200).json({
+          message: `login realizado, seja bem vindo ${person.name}`
+          
+        })
+      }else {
+        res.status(400).json({
+          message: "email ou senha inválida"
+        })
+      }
+    }else {
+      res.status(400).json({
+        message: "email ou senha inválida"
+      })
+  }
+  }else {
+    res.status(400).json({
+      message: "preencha todos os campos"
+    })
+  }
+ } catch (error) {
+  
+ }
+}
+
 module.exports = {
   getAll,
   createPerson,
+  login,
   deletePerson,
   updatePerson,
 
