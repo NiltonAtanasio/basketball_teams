@@ -3,46 +3,48 @@ const teams = require('../model/teams.json');
 const axios = require('axios');
 
 const getHome = (req, res) => {
-  res.status(200).send([{"message": "Home"}])
-}
-const getAll = (req, res) => {
-  res.status(200).send([{"message": teams}])
-}
-const createTeam = (req, res) => {
- 
-  let reqTeamName = req.body.teamName;
-  let reqUserName = req.body.userName;
-  
-  if(reqTeamName && reqUserName){
-    let newTeam = {
-      "id": Math.random().toString(32).substring(2),
-      "addedAt": new Date(),
-      "teamName": reqTeamName,
-      "userName": reqUserName
-    };
-
-    teams.push(newTeam);
-
-    res.status(200).send([{"message": "New team added",
-    newTeam
-    }]);
+  try {
+    res.status(200).send([{"message": "Home"}])
+    
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
   }
 }
-const getMovies = async (req, res) => {
+const getAll = (req, res) => {
   try {
-    let url = 'https://ghibliapi.herokuapp.com/films'
-   
-    let requestedMovies = await axios.get(url)
-   
-    res.status(200).send(requestedMovies.data)
-  } catch(error) {
-    console.error(error)
+    res.status(200).send(teams)
+    
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
+  }
+}
+const getOne = (req, res) => {
+  try {
+    let reqName = req.body.name
+    let teamFound = teams.find((team) => {
+      return team.teamName === reqName
+    })
+      
+    if(teamFound){
+     res.status(200).send(teamFound)
+    }else {
+      res.status(400).json({
+        message: "digite corretamente o nome do time",
+        reqName
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
   }
 }
 module.exports = {
   getHome,
-  getAll,
-  createTeam,
-  getMovies,
-
+  getAll, 
+  getOne,
 }

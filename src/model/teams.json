@@ -1,8 +1,68 @@
 [
   {
-    "id": "String",
-    "addedAt": "Date",
-    "teamName": "String",
-    "userName": "String"
+    "_id": "01",
+    "teamName": "boston celtics" ,
+    "elenco": [
+      {"name": "marcus smart", "position": "pg"},
+      {"name": "derrick white", "position": "sg"},
+      {"name": "jaylen brown", "position": "sf"},
+      {"name": "jayson tatum", "position": "pf"},
+      {"name": "al horford", "position": "c"}
+    ]
+  },
+  {
+    "_id": "02",
+    "teamName": "golden state warriors",
+    "elenco": [
+      {"name": "stephen curry", "position": "pg"},
+      {"name": "klay thompson", "position": "sg"},
+      {"name": "andrew wiggins", "position": "sf"},
+      {"name": "draymond green", "position": "pf"},
+      {"name": "kevon looney", "position": "c"}
+    ]
+  },
+  {
+    "_id": "03",
+    "teamName": "chicago bulls",
+    "elenco": [
+      {"name": "ayo dosunmu", "position": "pg"},
+      {"name": "zach lavine", "position": "sg"},
+      {"name": "demar derozan", "position": "sf"},
+      {"name": "patrick williams", "position": "pf"},
+      {"name": "nikola vucevic", "position": "c"}
+    ]
+  },
+  {
+    "_id": "04",
+    "teamName": "atlanta hawks",
+    "elenco": [
+      {"name": "trae young", "position": "pg"},
+      {"name": "dejounte murray", "position": "sg"},
+      {"name": "de'andre hunter", "position": "sf"},
+      {"name": "john colins", "position": "pf"},
+      {"name": "clint capela", "position": "c"}
+    ]
+  },
+  {
+    "_id": "05",
+    "teamName": "denver nuggets",
+    "elenco": [
+      {"name": "jamal murray", "position": "pg"},
+      {"name": "kentavious caldwell-pope", "position": "sg"},
+      {"name": "michael porter jr.", "position": "sf"},
+      {"name": "aaron gordon", "position": "pf"},
+      {"name": "nikola jokic", "position": "c"}
+    ]
+  },
+  {
+    "_id": "06",
+    "teamName": "dallas mavericks",
+    "elenco": [
+      {"name": "luka doncic", "position": "pg"},
+      {"name": "spencer dinwiddie", "position": "sg"},
+      {"name": "reggie bullock", "position": "sf"},
+      {"name": "dorian finney-smith", "position": "pf"},
+      {"name": "javele mcgee", "position": "c"}
+    ]
   }
 ]

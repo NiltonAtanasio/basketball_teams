@@ -5,6 +5,5 @@ const controllers = require('../controllers/teamsController');
 
 router.get('/', controllers.getHome);
 router.get('/all', controllers.getAll);
-router.post('/create', controllers.createTeam);
-router.get('/movies', controllers.getMovies)
+router.post('/getone', controllers.getOne)
 module.exports = router
