@@ -1,16 +1,19 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const db = require('./config/database');
+import express from 'express'
 
-const teamsRoutes = require('./routes/teamsRoutes');
-const personRoutes = require('./routes/personRoutes');
+import cors from 'cors'
 
-db.connect()
+import db from './config/database.js'
+
+import teamsRoutes from './routes/teamsRoutes.js'
+import personRoutes from './routes/personRoutes.js'
+
+const app = express(); 
+
+db()
 app.use(cors());
 app.use(express.json())
 
 app.use('/teams', teamsRoutes);
 app.use('/person', personRoutes);
 
-module.exports = app
+export default app

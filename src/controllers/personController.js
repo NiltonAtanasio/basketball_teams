@@ -1,6 +1,7 @@
-const { default: mongoose } = require('mongoose')
-const PersonSchema = require('../model/person')
-const bcrypt = require('bcrypt')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
+import PersonSchema from '../model/person.js'
+
 
 const getAll = async (req, res) =>  {
   try {
@@ -134,11 +135,10 @@ const login = async (req, res) => {
  }
 }
 
-module.exports = {
+export default {
   getAll,
   createPerson,
   login,
   deletePerson,
   updatePerson,
-
 }

@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express'
+
+import controllers from  '../controllers/personController.js'
 const router = express.Router();
 
-const controller = require('../controllers/personController');
 
-router.get('/all', controller.getAll)
-router.post('/create', controller.createPerson)
-router.post('/login', controller.login)
-router.delete('/delete', controller.deletePerson)
-router.put('/update', controller.updatePerson)
+router.get('/all', controllers.getAll)
+router.post('/create', controllers.createPerson)
+router.post('/login', controllers.login)
+router.delete('/delete', controllers.deletePerson)
+router.put('/update', controllers.updatePerson)
 
-module.exports = router
+export default router

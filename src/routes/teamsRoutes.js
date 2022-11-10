@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
-const controllers = require('../controllers/teamsController');
+import controllers from '../controllers/teamsController.js'
+
+const router = express.Router();
 
 router.get('/', controllers.getHome);
 router.get('/all', controllers.getAll);
 router.post('/getone', controllers.getOne)
-module.exports = router
+
+export default router

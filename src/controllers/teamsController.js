@@ -1,6 +1,4 @@
-const teams = require('../model/teams.json');
-//const fetch = require('node-fetch');
-const axios = require('axios');
+/* import teams from '../model/teams.json' assert { type: 'json' }; */
 
 const getHome = (req, res) => {
   try {
@@ -43,7 +41,7 @@ const getOne = (req, res) => {
     })
   }
 }
-module.exports = {
+export default {
   getHome,
   getAll, 
   getOne,
