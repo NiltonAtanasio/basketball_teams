@@ -1,14 +1,19 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-import PersonSchema from '../model/person.js'
-
+import personSevice from '../service/person.sevice.js'
 
 const getAll = async (req, res) =>  {
   try {
-    let allUsers = await PersonSchema.find()
-    res.status(200).json(allUsers)
+    let allUsers = await personSevice.findAllPerson()
+
+    if(allUsers.length === 0) {
+      res.status(400).send({message: "There are no registered users"})
+    }
+
+    res.status(200).send({ message: allUsers})
+
   } catch (error) {
-    res.status(500).json({
+    res.status(500).send({
       message: error.message
     })
   }
@@ -16,6 +21,32 @@ const getAll = async (req, res) =>  {
 
 const createPerson = async (req, res) => {
   try {
+    const { name, email, password } = req.body
+    
+    if(!name || !email || !password){
+      res.status(400).send({
+        message:"Submit all fields for registration"
+      })
+    }
+    
+    const person = await personSevice.createService(req.body)
+
+    if(!person){
+      res.status(400).send({message: "Error creating user"})
+    }
+    res.status(201).send({message: "User created successfully!",
+    person: {
+      id: person._id,
+      name,
+      email
+    }
+  })
+
+    
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+  /* try {
     let salt = bcrypt.genSaltSync()
     let reqPassword = req.body.password
     let password = bcrypt.hashSync(reqPassword, salt)
@@ -39,7 +70,7 @@ const createPerson = async (req, res) => {
     res.status(500).json({
       message: error.message
     })
-  }
+  } */
 }
 
 const deletePerson = async (req, res) => {

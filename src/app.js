@@ -2,14 +2,14 @@ import express from 'express'
 
 import cors from 'cors'
 
-import db from './config/database.js'
+import connect from './config/database.js'
 
 import teamsRoutes from './routes/teamsRoutes.js'
 import personRoutes from './routes/personRoutes.js'
 
 const app = express(); 
 
-db()
+connect()
 app.use(cors());
 app.use(express.json())
 

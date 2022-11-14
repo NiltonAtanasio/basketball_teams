@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt'
 
 const personSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -8,19 +9,24 @@ const personSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    require: true
+    require: true,
+    unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
-    require: true
+    require: true, 
+    select: false,
   },
   createdAt: {
     type: Date,
     default: new Date()
   },
-  salt: {
-    type: String
-  }
+})
+
+personSchema.pre('save', async function (next){
+  this.password = await bcrypt.hash(this.password, 10)
+  next()
 })
 
 export default mongoose.model('person', personSchema, 'person')
